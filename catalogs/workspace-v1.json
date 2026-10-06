@@ -1,0 +1,701 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/iamitesh/GenUi/catalogs/workspace-v1",
+  "title": "GenUI workspace catalog v1",
+  "$defs": {
+    "theme": {
+      "type": "object",
+      "properties": {
+        "colorScheme": {
+          "enum": [
+            "light",
+            "dark"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "anyComponent": {
+      "oneOf": [
+        {
+          "type": "object",
+          "description": "Vertical stack, with optional spacing.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "Column"
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "maxItems": 100
+            },
+            "gap": {
+              "enum": [
+                "small",
+                "medium",
+                "large"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "children"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Wrapping horizontal stack.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "Row"
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "maxItems": 100
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "children"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Responsive one, two or three column grid.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "Grid"
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "maxItems": 100
+            },
+            "columns": {
+              "enum": [
+                1,
+                2,
+                3
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "children"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "A surface grouping related content.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "Card"
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "maxItems": 100
+            },
+            "tone": {
+              "enum": [
+                "default",
+                "subtle",
+                "accent"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "children"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Plain text or semantic heading. HTML is never interpreted.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "Text"
+            },
+            "text": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 4000
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "pattern": "^/",
+                      "maxLength": 256
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "variant": {
+              "enum": [
+                "title",
+                "heading",
+                "body",
+                "muted",
+                "eyebrow"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "text"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "An explicit allowlisted event.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "Button"
+            },
+            "text": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 4000
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "pattern": "^/",
+                      "maxLength": 256
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "variant": {
+              "enum": [
+                "accent",
+                "primary",
+                "secondary"
+              ]
+            },
+            "action": {
+              "type": "object",
+              "properties": {
+                "event": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "enum": [
+                        "shortlist.toggle",
+                        "equipment.compare",
+                        "enquiry.open",
+                        "enquiry.review"
+                      ]
+                    },
+                    "context": {
+                      "type": "object",
+                      "maxProperties": 20
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "event"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "text",
+            "action"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Editable text with two-way absolute path binding.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "TextField"
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "value": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "pattern": "^/",
+                  "maxLength": 256
+                }
+              },
+              "required": [
+                "path"
+              ],
+              "additionalProperties": false
+            },
+            "placeholder": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "required": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "label",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Rental duration input, 1–90 days.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "NumberField"
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "value": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "pattern": "^/",
+                  "maxLength": 256
+                }
+              },
+              "required": [
+                "path"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "label",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Single selection from a finite list.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "Picker"
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "value": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "pattern": "^/",
+                  "maxLength": 256
+                }
+              },
+              "required": [
+                "path"
+              ],
+              "additionalProperties": false
+            },
+            "options": {
+              "type": "array",
+              "maxItems": 30,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "maxLength": 4000
+                  },
+                  "label": {
+                    "type": "string",
+                    "maxLength": 4000
+                  }
+                },
+                "required": [
+                  "id",
+                  "label"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "label",
+            "value",
+            "options"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Boolean choice with a visible label.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "Checkbox"
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "value": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "pattern": "^/",
+                  "maxLength": 256
+                }
+              },
+              "required": [
+                "path"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "label",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Short status label.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "Badge"
+            },
+            "text": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 4000
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "pattern": "^/",
+                      "maxLength": 256
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "tone": {
+              "enum": [
+                "neutral",
+                "positive",
+                "info",
+                "notice"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "text"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Separates groups.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "Divider"
+            }
+          },
+          "required": [
+            "id",
+            "component"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Label, value, and a short annotation.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "Metric"
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "value": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 4000
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "pattern": "^/",
+                      "maxLength": 256
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "detail": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 4000
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "pattern": "^/",
+                      "maxLength": 256
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "label",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Accessible comparison of fixture specifications.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "Table"
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "columns": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 8,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "maxLength": 4000
+                  },
+                  "label": {
+                    "type": "string",
+                    "maxLength": 4000
+                  }
+                },
+                "required": [
+                  "key",
+                  "label"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "rows": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "pattern": "^/",
+                  "maxLength": 256
+                }
+              },
+              "required": [
+                "path"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "label",
+            "columns",
+            "rows"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Fixture-backed equipment summary, shortlist control, and enquiry action. Never accepts invented product specifications.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,79}$"
+            },
+            "component": {
+              "const": "EquipmentCard"
+            },
+            "equipmentId": {
+              "enum": [
+                "mini",
+                "medium",
+                "large"
+              ]
+            },
+            "selection": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "pattern": "^/",
+                  "maxLength": 256
+                }
+              },
+              "required": [
+                "path"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "id",
+            "component",
+            "equipmentId",
+            "selection"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

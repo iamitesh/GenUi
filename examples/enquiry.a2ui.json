@@ -1,0 +1,246 @@
+[
+  {
+    "version": "v0.9.1",
+    "createSurface": {
+      "surfaceId": "workspace",
+      "catalogId": "https://github.com/iamitesh/GenUi/catalogs/workspace-v1"
+    }
+  },
+  {
+    "version": "v0.9.1",
+    "updateDataModel": {
+      "surfaceId": "workspace",
+      "value": {
+        "shortlist": [
+          "medium",
+          "large"
+        ],
+        "request": {
+          "location": "Bengaluru",
+          "days": 14,
+          "project": "Foundations",
+          "equipment": "medium",
+          "name": "",
+          "email": "",
+          "note": "",
+          "consent": false
+        }
+      }
+    }
+  },
+  {
+    "version": "v0.9.1",
+    "updateComponents": {
+      "surfaceId": "workspace",
+      "components": [
+        {
+          "id": "root",
+          "component": "Column",
+          "children": [
+            "headline",
+            "enquiry-note",
+            "form-layout",
+            "enquiry-actions"
+          ],
+          "gap": "large"
+        },
+        {
+          "id": "headline",
+          "component": "Text",
+          "text": "Your project, one step closer.",
+          "variant": "title"
+        },
+        {
+          "id": "enquiry-note",
+          "component": "Text",
+          "text": "Shape your request, then review a local draft. Nothing is sent to a dealer.",
+          "variant": "muted"
+        },
+        {
+          "id": "form-layout",
+          "component": "Grid",
+          "children": [
+            "form-card",
+            "summary-card"
+          ],
+          "columns": 2
+        },
+        {
+          "id": "form-card",
+          "component": "Card",
+          "children": [
+            "form-title",
+            "location",
+            "days",
+            "project",
+            "contact-name",
+            "contact-email",
+            "project-note",
+            "consent"
+          ]
+        },
+        {
+          "id": "form-title",
+          "component": "Text",
+          "text": "Rental details",
+          "variant": "heading"
+        },
+        {
+          "id": "location",
+          "component": "TextField",
+          "label": "Project location",
+          "value": {
+            "path": "/request/location"
+          },
+          "required": true
+        },
+        {
+          "id": "days",
+          "component": "NumberField",
+          "label": "Rental duration (days)",
+          "value": {
+            "path": "/request/days"
+          }
+        },
+        {
+          "id": "project",
+          "component": "Picker",
+          "label": "Project type",
+          "value": {
+            "path": "/request/project"
+          },
+          "options": [
+            {
+              "id": "Foundations",
+              "label": "Foundations"
+            },
+            {
+              "id": "Urban groundwork",
+              "label": "Urban groundwork"
+            },
+            {
+              "id": "Earthmoving",
+              "label": "Earthmoving"
+            }
+          ]
+        },
+        {
+          "id": "contact-name",
+          "component": "TextField",
+          "label": "Your name",
+          "value": {
+            "path": "/request/name"
+          },
+          "required": true,
+          "placeholder": "Name for the enquiry"
+        },
+        {
+          "id": "contact-email",
+          "component": "TextField",
+          "label": "Email",
+          "value": {
+            "path": "/request/email"
+          },
+          "required": true,
+          "placeholder": "you@company.com"
+        },
+        {
+          "id": "project-note",
+          "component": "TextField",
+          "label": "Project notes (optional)",
+          "value": {
+            "path": "/request/note"
+          },
+          "placeholder": "Access, terrain, or other requirements"
+        },
+        {
+          "id": "consent",
+          "component": "Checkbox",
+          "label": "I understand these are illustrative rates.",
+          "value": {
+            "path": "/request/consent"
+          }
+        },
+        {
+          "id": "summary-card",
+          "component": "Card",
+          "tone": "accent",
+          "children": [
+            "summary-badge",
+            "summary-name",
+            "summary-location",
+            "summary-rate",
+            "summary-description",
+            "summary-divider",
+            "summary-fineprint"
+          ]
+        },
+        {
+          "id": "summary-badge",
+          "component": "Badge",
+          "text": "YOUR SELECTED MACHINE",
+          "tone": "info"
+        },
+        {
+          "id": "summary-name",
+          "component": "Text",
+          "text": "Terra Works 20",
+          "variant": "title"
+        },
+        {
+          "id": "summary-location",
+          "component": "Text",
+          "text": {
+            "path": "/request/location"
+          },
+          "variant": "muted"
+        },
+        {
+          "id": "summary-rate",
+          "component": "Metric",
+          "label": "Illustrative daily rate",
+          "value": "₹12,500",
+          "detail": "Final quote and availability need confirmation."
+        },
+        {
+          "id": "summary-description",
+          "component": "Text",
+          "text": "A versatile starting point for foundations and general construction."
+        },
+        {
+          "id": "summary-divider",
+          "component": "Divider"
+        },
+        {
+          "id": "summary-fineprint",
+          "component": "Text",
+          "text": "This demo creates a draft in your current browser session. It does not book equipment or send an enquiry.",
+          "variant": "muted"
+        },
+        {
+          "id": "enquiry-actions",
+          "component": "Row",
+          "children": [
+            "review-button"
+          ]
+        },
+        {
+          "id": "review-button",
+          "component": "Button",
+          "text": "Review enquiry",
+          "variant": "accent",
+          "action": {
+            "event": {
+              "name": "enquiry.review",
+              "context": {
+                "request": {
+                  "path": "/request"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+]

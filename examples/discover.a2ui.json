@@ -1,0 +1,129 @@
+[
+  {
+    "version": "v0.9.1",
+    "createSurface": {
+      "surfaceId": "workspace",
+      "catalogId": "https://github.com/iamitesh/GenUi/catalogs/workspace-v1"
+    }
+  },
+  {
+    "version": "v0.9.1",
+    "updateDataModel": {
+      "surfaceId": "workspace",
+      "value": {
+        "shortlist": [
+          "medium",
+          "large"
+        ],
+        "request": {
+          "location": "Bengaluru",
+          "days": 14,
+          "project": "Foundations",
+          "equipment": "medium",
+          "name": "",
+          "email": "",
+          "note": "",
+          "consent": false
+        },
+        "resultSummary": "3 sample machines · Bengaluru · 14 days"
+      }
+    }
+  },
+  {
+    "version": "v0.9.1",
+    "updateComponents": {
+      "surfaceId": "workspace",
+      "components": [
+        {
+          "id": "root",
+          "component": "Column",
+          "children": [
+            "headline",
+            "result-summary",
+            "equipment-grid",
+            "discover-footer"
+          ],
+          "gap": "large"
+        },
+        {
+          "id": "headline",
+          "component": "Text",
+          "text": "The right machine. For your next project.",
+          "variant": "title"
+        },
+        {
+          "id": "result-summary",
+          "component": "Text",
+          "text": {
+            "path": "/resultSummary"
+          },
+          "variant": "muted"
+        },
+        {
+          "id": "equipment-grid",
+          "component": "Grid",
+          "children": [
+            "equipment-mini",
+            "equipment-medium",
+            "equipment-large"
+          ],
+          "columns": 3
+        },
+        {
+          "id": "equipment-mini",
+          "component": "EquipmentCard",
+          "equipmentId": "mini",
+          "selection": {
+            "path": "/shortlist"
+          }
+        },
+        {
+          "id": "equipment-medium",
+          "component": "EquipmentCard",
+          "equipmentId": "medium",
+          "selection": {
+            "path": "/shortlist"
+          }
+        },
+        {
+          "id": "equipment-large",
+          "component": "EquipmentCard",
+          "equipmentId": "large",
+          "selection": {
+            "path": "/shortlist"
+          }
+        },
+        {
+          "id": "discover-footer",
+          "component": "Row",
+          "children": [
+            "compare-button",
+            "fixture-note"
+          ]
+        },
+        {
+          "id": "compare-button",
+          "component": "Button",
+          "text": "Compare shortlist",
+          "variant": "accent",
+          "action": {
+            "event": {
+              "name": "equipment.compare",
+              "context": {
+                "ids": {
+                  "path": "/shortlist"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "fixture-note",
+          "component": "Text",
+          "text": "Illustrative equipment and rates. Confirm specifications and availability with a dealer.",
+          "variant": "muted"
+        }
+      ]
+    }
+  }
+]

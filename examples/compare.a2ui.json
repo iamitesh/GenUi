@@ -1,0 +1,180 @@
+[
+  {
+    "version": "v0.9.1",
+    "createSurface": {
+      "surfaceId": "workspace",
+      "catalogId": "https://github.com/iamitesh/GenUi/catalogs/workspace-v1"
+    }
+  },
+  {
+    "version": "v0.9.1",
+    "updateDataModel": {
+      "surfaceId": "workspace",
+      "value": {
+        "shortlist": [
+          "medium",
+          "large"
+        ],
+        "request": {
+          "location": "Bengaluru",
+          "days": 14,
+          "project": "Foundations",
+          "equipment": "medium",
+          "name": "",
+          "email": "",
+          "note": "",
+          "consent": false
+        },
+        "comparison": [
+          {
+            "id": "type",
+            "label": "Best suited to",
+            "medium": "General construction",
+            "large": "Bulk earthmoving"
+          },
+          {
+            "id": "weight",
+            "label": "Operating weight",
+            "medium": "20 t",
+            "large": "30 t"
+          },
+          {
+            "id": "power",
+            "label": "Engine power",
+            "medium": "110 kW",
+            "large": "170 kW"
+          },
+          {
+            "id": "reach",
+            "label": "Maximum reach",
+            "medium": "9.4 m",
+            "large": "10.2 m"
+          },
+          {
+            "id": "rate",
+            "label": "Illustrative daily rate",
+            "medium": "₹12,500",
+            "large": "₹18,500"
+          },
+          {
+            "id": "total",
+            "label": "14-day base estimate",
+            "medium": "₹1,75,000",
+            "large": "₹2,59,000"
+          },
+          {
+            "id": "available",
+            "label": "Availability",
+            "medium": "Needs confirmation",
+            "large": "Needs confirmation"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "version": "v0.9.1",
+    "updateComponents": {
+      "surfaceId": "workspace",
+      "components": [
+        {
+          "id": "root",
+          "component": "Column",
+          "children": [
+            "headline",
+            "comparison-note",
+            "compare-cards",
+            "comparison-table",
+            "comparison-footer"
+          ],
+          "gap": "large"
+        },
+        {
+          "id": "headline",
+          "component": "Text",
+          "text": "A clearer view of your options.",
+          "variant": "title"
+        },
+        {
+          "id": "comparison-note",
+          "component": "Text",
+          "text": "Compare the details that matter for your 14-day project.",
+          "variant": "muted"
+        },
+        {
+          "id": "compare-cards",
+          "component": "Grid",
+          "children": [
+            "metric-medium",
+            "metric-large"
+          ],
+          "columns": 2
+        },
+        {
+          "id": "metric-medium",
+          "component": "Metric",
+          "label": "Terra Works 20",
+          "value": "₹1,75,000",
+          "detail": "Sample base hire · 14 days"
+        },
+        {
+          "id": "metric-large",
+          "component": "Metric",
+          "label": "Terra Pro 30",
+          "value": "₹2,59,000",
+          "detail": "Sample base hire · 14 days"
+        },
+        {
+          "id": "comparison-table",
+          "component": "Table",
+          "label": "Equipment comparison",
+          "columns": [
+            {
+              "key": "label",
+              "label": "Specification"
+            },
+            {
+              "key": "medium",
+              "label": "Terra Works 20"
+            },
+            {
+              "key": "large",
+              "label": "Terra Pro 30"
+            }
+          ],
+          "rows": {
+            "path": "/comparison"
+          }
+        },
+        {
+          "id": "comparison-footer",
+          "component": "Row",
+          "children": [
+            "enquiry-button",
+            "estimate-note"
+          ]
+        },
+        {
+          "id": "enquiry-button",
+          "component": "Button",
+          "text": "Build a rental enquiry",
+          "variant": "accent",
+          "action": {
+            "event": {
+              "name": "enquiry.open",
+              "context": {
+                "equipmentId": "medium"
+              }
+            }
+          }
+        },
+        {
+          "id": "estimate-note",
+          "component": "Text",
+          "text": "Demo estimates exclude taxes, transport, fuel and operator charges.",
+          "variant": "muted"
+        }
+      ]
+    }
+  }
+]
